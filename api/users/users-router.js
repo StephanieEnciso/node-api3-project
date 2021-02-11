@@ -1,14 +1,24 @@
 const express = require('express');
+const {
+  logger,
+  validateUserId,
+  validateUser,
+  validatePost
+} = require('../middleware/middleware');
+
+const User = require('./users-model');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
   // RETURN AN ARRAY WITH ALL THE USERS
+
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', validateUserId, (req, res) => {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
+  res.status(200).json(req.user);
 });
 
 router.post('/', (req, res) => {
@@ -39,3 +49,4 @@ router.post('/:id/posts', (req, res) => {
 });
 
 // do not forget to export the router
+module.exports = router
