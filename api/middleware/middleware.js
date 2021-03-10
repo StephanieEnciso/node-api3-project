@@ -3,7 +3,8 @@ const Post = require('../posts/posts-model')
 
 function logger(req, res, next) {
   let URL = req.protocol + '://' + req.get('host') + req.originalUrl
-  console.log( `A ${req.method} request was made to ${URL} on ${Date.toLocaleString()}.`)
+  console.log( `A ${req.method} request was made to ${URL} on ${Date().toLocaleString()}.`)
+  next()
 }
 
 async function validateUserId(req, res, next) {
@@ -16,6 +17,7 @@ async function validateUserId(req, res, next) {
       })
     } else {
       req.user = user
+      next()
     }
   } catch (err) {
     res.status(500).json({
@@ -61,7 +63,8 @@ async function validatePostId(req, res, next) {
         message: "post not found"
       })
     } else {
-      res.post = post
+      req.post = post
+      next()
     }
   } catch (err) {
     res.status(500).json({
