@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const User = require('./users-model')
+
 router.get('/', (req, res) => {
   // RETURN AN ARRAY WITH ALL THE USERS
 });
@@ -39,3 +41,4 @@ router.post('/:id/posts', (req, res) => {
 });
 
 // do not forget to export the router
+module.exports = router
