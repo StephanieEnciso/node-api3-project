@@ -28,13 +28,13 @@ async function validateUserId(req, res, next) {
 
 function validateUser(req, res, next) {
   const { name } = req.body
-  if(!req.body) {
+  if(name === "") {
     res.status(400).json({
-      message: "missing user data"
+      message: "missing required name"
     })
   } else if (!name) {
     res.status(400).json({
-      message: "missing required name"
+      message: "missing user data"
     })
   } else {
     next()
